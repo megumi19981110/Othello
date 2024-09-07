@@ -7,15 +7,94 @@
 </head>
 <body>
     <div class="container">
-        <div id="title"></div>
-        <div id="board">
-            <div class="board-row"></div>
-            <div class="board-row"></div>
-            <div class="board-row"></div>
-            <div class="board-row"></div>
-            <div class="board-row"></div>
+        <div id="title">
+            <h1>Othello</h1>
         </div>
-        <div id="controller"></div>
+        <div id="board">
+            <div class="board-row">
+                <button type="button" class="square" date-row="0" date-col="0"></button>
+                <button type="button" class="square" date-row="0" date-col="1"></button>
+                <button type="button" class="square" date-row="0" date-col="2"></button>
+                <button type="button" class="square" date-row="0" date-col="3"></button>
+                <button type="button" class="square" date-row="0" date-col="4"></button>
+                <button type="button" class="square" date-row="0" date-col="5"></button>
+                <button type="button" class="square" date-row="0" date-col="6"></button>
+                <button type="button" class="square" date-row="0" date-col="7"></button>
+            </div>
+            <div class="board-row">
+                <button type="button" class="square" date-row="1" date-col="0"></button>
+                <button type="button" class="square" date-row="1" date-col="1"></button>
+                <button type="button" class="square" date-row="1" date-col="2"></button>
+                <button type="button" class="square" date-row="1" date-col="3"></button>
+                <button type="button" class="square" date-row="1" date-col="4"></button>
+                <button type="button" class="square" date-row="1" date-col="5"></button>
+                <button type="button" class="square" date-row="1" date-col="6"></button>
+                <button type="button" class="square" date-row="1" date-col="7"></button>
+            </div>
+            <div class="board-row">
+                <button type="button" class="square" date-row="2" date-col="0"></button>
+                <button type="button" class="square" date-row="2" date-col="1"></button>
+                <button type="button" class="square" date-row="2" date-col="2"></button>
+                <button type="button" class="square" date-row="2" date-col="3"></button>
+                <button type="button" class="square" date-row="2" date-col="4"></button>
+                <button type="button" class="square" date-row="2" date-col="5"></button>
+                <button type="button" class="square" date-row="2" date-col="6"></button>
+                <button type="button" class="square" date-row="2" date-col="7"></button>
+            </div>
+            <div class="board-row">
+                <button type="button" class="square" date-row="3" date-col="0"></button>
+                <button type="button" class="square" date-row="3" date-col="1"></button>
+                <button type="button" class="square" date-row="3" date-col="2"></button>
+                <button type="button" class="square" date-row="3" date-col="3"></button>
+                <button type="button" class="square" date-row="3" date-col="4"></button>
+                <button type="button" class="square" date-row="3" date-col="5"></button>
+                <button type="button" class="square" date-row="3" date-col="6"></button>
+                <button type="button" class="square" date-row="3" date-col="7"></button>
+            </div>
+            <div class="board-row">
+                <button type="button" class="square" date-row="4" date-col="0"></button>
+                <button type="button" class="square" date-row="4" date-col="1"></button>
+                <button type="button" class="square" date-row="4" date-col="2"></button>
+                <button type="button" class="square" date-row="4" date-col="3"></button>
+                <button type="button" class="square" date-row="4" date-col="4"></button>
+                <button type="button" class="square" date-row="4" date-col="5"></button>
+                <button type="button" class="square" date-row="4" date-col="6"></button>
+                <button type="button" class="square" date-row="4" date-col="7"></button>
+            </div>
+            <div class="board-row">
+                <button type="button" class="square" date-row="5" date-col="0"></button>
+                <button type="button" class="square" date-row="5" date-col="1"></button>
+                <button type="button" class="square" date-row="5" date-col="2"></button>
+                <button type="button" class="square" date-row="5" date-col="3"></button>
+                <button type="button" class="square" date-row="5" date-col="4"></button>
+                <button type="button" class="square" date-row="5" date-col="5"></button>
+                <button type="button" class="square" date-row="5" date-col="6"></button>
+                <button type="button" class="square" date-row="5" date-col="7"></button>
+            </div>
+            <div class="board-row">
+                <button type="button" class="square" date-row="6" date-col="0"></button>
+                <button type="button" class="square" date-row="6" date-col="1"></button>
+                <button type="button" class="square" date-row="6" date-col="2"></button>
+                <button type="button" class="square" date-row="6" date-col="3"></button>
+                <button type="button" class="square" date-row="6" date-col="4"></button>
+                <button type="button" class="square" date-row="6" date-col="5"></button>
+                <button type="button" class="square" date-row="6" date-col="6"></button>
+                <button type="button" class="square" date-row="6" date-col="7"></button>
+            </div>
+            <div class="board-row">
+                <button type="button" class="square" date-row="7" date-col="0"></button>
+                <button type="button" class="square" date-row="7" date-col="1"></button>
+                <button type="button" class="square" date-row="7" date-col="2"></button>
+                <button type="button" class="square" date-row="7" date-col="3"></button>
+                <button type="button" class="square" date-row="7" date-col="4"></button>
+                <button type="button" class="square" date-row="7" date-col="5"></button>
+                <button type="button" class="square" date-row="7" date-col="6"></button>
+                <button type="button" class="square" date-row="7" date-col="7"></button>
+            </div>
+        </div>
+        <div id="controller">
+            <button type="button" id="btn-initialize">リセット</button>
+        </div>
     </div>
 </body>
 </html>
