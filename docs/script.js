@@ -1,3 +1,7 @@
+SQUARE_STATUS_IS_OWNED="01";
+SQUARE_STATUS_IS_OTHER="02";
+SQUARE_STATUS_NOT_SELECTED="09";
+
 let isOddTurn = true;
 
 $(function () {
@@ -24,6 +28,7 @@ function clickSquareEvent() {
 
  function changeOwner(square) {
   putPiece(square, getTurnString());
+  changeOwnerOpposite(square);
   changeTurn();
 }
 
@@ -52,3 +57,65 @@ function canSelect(square) {
   }
   return true;
 }
+
+function changeOwnerOpposite(square) {
+    let row = square.data("row");
+    let col = square.data("col");
+  
+    changeOwnerOppositeLower(row, col); // 下
+  }
+
+  function changeOwnerOppositeLower(row, col) {
+    let endPos = getPosOppositeLower(row, col);
+    if (endPos == null) {
+      return;
+    }
+  
+    let targetCol = col;
+    for (targetRow = row + 1; targetRow < endPos.row; targetRow++) {
+      let targetSquare = getTargetSquare(targetRow, targetCol);
+      putPiece(targetSquare, getTurnString());
+    }
+  }
+  
+  function getPosOppositeLower(row, col) {
+    if (row == 7) {
+      return null;
+    }
+
+    let targetRow = row + 1;
+    let targetCol = col;
+    if (getSquareStatus(targetRow, targetCol) != SQUARE_STATUS_IS_OTHER) {
+      return null;
+    }
+
+    for (targetRow++; targetRow <= 7; targetRow++) {
+      let status = getSquareStatus(targetRow, targetCol);
+  
+      if (status == SQUARE_STATUS_NOT_SELECTED) {
+        return null;
+      }
+
+      if (status == SQUARE_STATUS_IS_OWNED) {
+        return {
+          row: targetRow,
+          col: targetCol,
+        };
+      }
+    }
+    return null;
+  }
+  
+  function getSquareStatus(row, col) {
+    let targetSquare = getTargetSquare(row, col);
+  
+    if (!targetSquare.hasClass("selected")) {
+      return SQUARE_STATUS_NOT_SELECTED;
+    }
+  
+    if (getTurnString() == targetSquare.attr("data-owner")) {
+      return SQUARE_STATUS_IS_OWNED;
+    }
+
+    return SQUARE_STATUS_IS_OTHER;
+  }
