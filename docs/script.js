@@ -1,6 +1,12 @@
-SQUARE_STATUS_IS_OWNED="01";
-SQUARE_STATUS_IS_OTHER="02";
-SQUARE_STATUS_NOT_SELECTED="09";
+SQUARE_STATUS_IS_OWNED = "01";
+SQUARE_STATUS_IS_OTHER = "02";
+SQUARE_STATUS_NOT_SELECTED = "09"; 
+
+toastr.options = {
+    tapToDismiss: false,
+    timeOut: 0,
+    extendedTimeOut: 0,
+};
 
 let isOddTurn = true;
 
@@ -13,25 +19,54 @@ $(function () {
 function clickSquareEvent() {
   let square = $(this);
   
-  if(!canSelect(square)) {
+  if (!canSelect(square)) {
     return;
-  }
+}
+
+  toastr.remove();
 
   changeOwner(square);
+
+      if (isGameEnd()) {
+        toastEndMessage("ゲームが終了しました。");
+        return;
+    }
+
+    if (isPass()) {
+        toastr.remove();
+        toastr.error(getTurnString() + "には選択できるマスがありません。");
+
+        changeTurn();
+        if (isPass()) {
+            toastr.error(getTurnString() + "には選択できるマスがありません。");
+            toastEndMessage("選択できるマスがなくなりました。");
+        } else {
+            setTimeout(function () {
+                toastr.info(getTurnString() + "の番です。");
+            }, 1000);
+        }
+
+        return;
+    }
+        toastr.info(getTurnString() + "の番です。");
 }
 
  function initializeEvent() {
+    toastr.remove();
+
         $(".square")
         .removeClass("selected")
         .text("")
         .attr("data-owner", "");
     isOddTurn = true;
+    changeOwner(getTargetSquare(3, 4));
+    changeOwner(getTargetSquare(3, 3));
+    changeOwner(getTargetSquare(4, 3));
+    changeOwner(getTargetSquare(4, 4));
 
-  changeOwner(getTargetSquare(3, 3));
-  changeOwner(getTargetSquare(3, 4));
-  changeOwner(getTargetSquare(4, 4));
-  changeOwner(getTargetSquare(4, 3));
-}
+toastr.info(getTurnString()+"の番です。");
+
+ }
 
  function changeOwner(square) {
   putPiece(square, getTurnString());
@@ -101,7 +136,6 @@ function canSelect(square) {
   }
 
   return false;
-
 }
 
 function changeOwnerOpposite(square) {
@@ -493,3 +527,33 @@ if (getSquareStatus(targetRow, targetCol) != SQUARE_STATUS_IS_OTHER) {
 
     return SQUARE_STATUS_IS_OTHER;
   }
+
+  function isGameEnd() {
+    if ($(".square.selected").length == 64) {
+        return true;
+    }
+    return false;
+}
+
+function toastEndMessage(message) {
+    let countBlack = $("[data-owner=black]").length;
+    let countWhite = $("[data-owner=white]").length;
+
+    let judgeString =
+        "black:" + countBlack + "<br/>" + "white:" + countWhite + "<br/>";
+
+    if (countBlack == countWhite) {
+        toastr.success(message + "<br/>" + judgeString + "引き分けです。");
+    } else if (countBlack < countWhite) {
+        toastr.success(message + "<br/>" + judgeString + "whiteの勝利です。");
+    } else {
+        toastr.success(message + "<br/>" + judgeString + "blackの勝利です。");
+    }
+}
+
+function isPass() {
+    if ($(".square.can-select").length == 0) {
+        return true;
+    }
+    return false;
+}
